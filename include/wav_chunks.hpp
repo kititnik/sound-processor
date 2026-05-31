@@ -4,14 +4,14 @@
 
 struct __attribute__((packed)) RiffHeader
 {
-    uint32_t chunkId;
+    char chunkId[4];
     uint32_t chunkSize;
-    uint32_t waveId;
+    char waveId[4];
 };
 
 struct __attribute__((packed)) FmtHeader
 {
-    uint32_t chunkId;
+    char chunkId[4];
     uint32_t chunkSize;
     uint16_t wFormatTag;
     uint16_t wChannels;
@@ -23,6 +23,6 @@ struct __attribute__((packed)) FmtHeader
 
 struct __attribute__((packed)) DataChunkHeader
 {
-    uint32_t chunkId;
+    char chunkId[4];
     uint32_t chunkSize;
 };
