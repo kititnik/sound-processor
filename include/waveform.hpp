@@ -10,6 +10,7 @@ class Waveform {
         Waveform(std::vector<int16_t> samples);
         
         size_t size() const;
+        const int16_t* data() const;
         double durationMs() const;
         int16_t getSample(size_t idx) const;
         

@@ -8,6 +8,10 @@ size_t Waveform::size() const {
     return _samples.size();
 }
 
+const int16_t* Waveform::data() const {
+    return _samples.data();
+}
+
 double Waveform::durationMs() const {
     return samplesToMs(_samples.size());
 }
