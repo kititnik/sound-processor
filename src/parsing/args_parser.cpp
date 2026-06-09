@@ -7,7 +7,7 @@
 #include <vector>
 
 void ArgsParser::parseArgs(int argc, char* argv[]) {
-    for(int i = 1; i < argc; ) {
+    for(int i = 1; i < argc;) {
         std::string_view arg = argv[i];
         if(arg == "-i") {
             _inputFileName = requireNext(i, argc, argv, "-i");
@@ -28,16 +28,19 @@ void ArgsParser::parseArgs(int argc, char* argv[]) {
             _filterDescriptors.push_back(std::move(filterDescriptor));
         }
         else {
-            throw std::runtime_error(std::format("Wrong CLI input: unknown flag: {}", argv[i]));
+            throw std::runtime_error(
+                std::format("Wrong CLI input: unknown flag: {}", argv[i]));
         }
     }
 }
 
-std::string_view ArgsParser::requireNext(int argvIdx, int argc, char* argv[], std::string_view flag) {
+std::string_view ArgsParser::requireNext(int argvIdx, int argc, char* argv[],
+                                         std::string_view flag) {
     if(argvIdx + 1 >= argc) {
-        throw std::runtime_error(std::format("Wrong CLI input: missing value after {}", flag));
+        throw std::runtime_error(
+            std::format("Wrong CLI input: missing value after {}", flag));
     }
-    return argv[argvIdx+1];
+    return argv[argvIdx + 1];
 }
 
 const std::optional<std::string>& ArgsParser::getInputFileName() const {

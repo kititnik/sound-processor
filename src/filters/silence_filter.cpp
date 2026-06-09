@@ -15,11 +15,11 @@ void SilenceFilter::apply(Waveform* sound) {
     if(_unit == "sec") {
         startSample = Waveform::secToSamples(_start);
         endSample = Waveform::secToSamples(_end);
-    } 
+    }
     else if(_unit == "ms") {
         startSample = Waveform::msToSamples(_start);
         endSample = Waveform::msToSamples(_end);
-    } 
+    }
     else {
         throw std::runtime_error("Unknown unit for silence filter: " + _unit);
     }

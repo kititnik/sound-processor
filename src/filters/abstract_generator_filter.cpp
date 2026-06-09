@@ -1,7 +1,8 @@
 #include "filters/abstract_generator_filter.hpp"
 #include <stdexcept>
 
-AbstractGeneratorFilter::AbstractGeneratorFilter(double durationMs) : _durationMs(durationMs) {}
+AbstractGeneratorFilter::AbstractGeneratorFilter(double durationMs)
+    : _durationMs(durationMs) {}
 
 void AbstractGeneratorFilter::apply(Waveform* sound) {
     if(sound == nullptr) {

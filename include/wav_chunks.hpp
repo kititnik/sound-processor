@@ -2,15 +2,13 @@
 
 #include <cstdint>
 
-struct __attribute__((packed)) RiffHeader
-{
+struct __attribute__((packed)) RiffHeader {
     char chunkId[4];
     uint32_t chunkSize;
     char waveId[4];
 };
 
-struct __attribute__((packed)) FmtHeader
-{
+struct __attribute__((packed)) FmtHeader {
     char chunkId[4];
     uint32_t chunkSize;
     uint16_t wFormatTag;
@@ -21,8 +19,7 @@ struct __attribute__((packed)) FmtHeader
     uint16_t wBitsPerSample;
 };
 
-struct __attribute__((packed)) DataChunkHeader
-{
+struct __attribute__((packed)) DataChunkHeader {
     char chunkId[4];
     uint32_t chunkSize;
 };

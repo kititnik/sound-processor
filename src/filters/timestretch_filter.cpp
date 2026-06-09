@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include <vector>
 
-TimestretchFilter::TimestretchFilter(double factor) : _factor(factor) {}
+TimestretchFilter::TimestretchFilter(double factor): _factor(factor) {}
 
 void TimestretchFilter::apply(Waveform* sound) {
     if(sound == nullptr) {
@@ -22,9 +22,10 @@ void TimestretchFilter::apply(Waveform* sound) {
 
         if(pastIdx == oldSize - 1) {
             result[i] = sound->getSample(pastIdx);
-        } 
+        }
         else {
-            double newValue = sound->getSample(pastIdx) * (1.0 - frac) + sound->getSample(pastIdx + 1) * frac;
+            double newValue = sound->getSample(pastIdx) * (1.0 - frac) +
+                              sound->getSample(pastIdx + 1) * frac;
             result[i] = static_cast<int16_t>(newValue);
         }
     }
