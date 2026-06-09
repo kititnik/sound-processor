@@ -25,7 +25,7 @@ void Application::configure() {
                                                      generatorFilterCreator);
 }
 
-void Application::run(int argc, char* argv[]) {
+void Application::run(int argc, const char* argv[]) {
     if(argc == 1) {
         std::cout << _helpMessage << '\n';
     }

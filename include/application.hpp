@@ -6,7 +6,7 @@
 class Application {
 public:
     void configure();
-    void run(int argc, char* argv[]);
+    void run(int argc, const char* argv[]);
 
 private:
     CmdLineArgs2PipelineConverter _cmdLineArgs2PipelineConverter;

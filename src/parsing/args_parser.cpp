@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-void ArgsParser::parseArgs(int argc, char* argv[]) {
+void ArgsParser::parseArgs(int argc, const char* argv[]) {
     for(int i = 1; i < argc;) {
         std::string_view arg = argv[i];
         if(arg == "-i") {
@@ -34,7 +34,7 @@ void ArgsParser::parseArgs(int argc, char* argv[]) {
     }
 }
 
-std::string_view ArgsParser::requireNext(int argvIdx, int argc, char* argv[],
+std::string_view ArgsParser::requireNext(int argvIdx, int argc, const char* argv[],
                                          std::string_view flag) {
     if(argvIdx + 1 >= argc) {
         throw std::runtime_error(

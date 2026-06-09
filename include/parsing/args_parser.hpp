@@ -8,14 +8,14 @@
 
 class ArgsParser {
 public:
-    void parseArgs(int argc, char* argv[]);
+    void parseArgs(int argc, const char* argv[]);
 
     const std::optional<std::string>& getInputFileName() const;
     const std::optional<std::string>& getOutputFileName() const;
     const std::vector<FilterDescriptor>& getFilterDescriptors() const;
 
 private:
-    std::string_view requireNext(int argvIdx, int argc, char* argv[],
+    std::string_view requireNext(int argvIdx, int argc, const char* argv[],
                                  std::string_view flag);
 
     std::optional<std::string> _inputFileName;
