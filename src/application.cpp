@@ -17,6 +17,7 @@ void Application::configure() {
     _cmdLineArgs2PipelineConverter.addFilterProducer("silence", silenceFilterCreator);
     _cmdLineArgs2PipelineConverter.addFilterProducer("timestretch", timestretchFilterCreator);
     _cmdLineArgs2PipelineConverter.addFilterProducer("lowpass", lowpassFilterCreator);
+    _cmdLineArgs2PipelineConverter.addFilterProducer("generator", generatorFilterCreator);
 }
 
 void Application::run(int argc, char* argv[]) {

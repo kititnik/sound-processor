@@ -15,6 +15,10 @@ add_executable(sound_processor
     src/filters/silence_filter.cpp
     src/filters/timestretch_filter.cpp
     src/filters/lowpass_filter.cpp
+    src/filters/abstract_generator_filter.cpp
+    src/filters/sin_gen_filter.cpp
+    src/filters/am_sin_gen_filter.cpp
+    src/filters/fm_sin_gen_filter.cpp
     src/parsing/args_parser.cpp
     src/parsing/cmd_line_args_2_pipeline_converter.cpp
     src/parsing/filter_producers.cpp
