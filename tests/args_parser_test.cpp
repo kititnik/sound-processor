@@ -1,5 +1,5 @@
-#include <catch2/catch_all.hpp>
 #include "parsing/args_parser.hpp"
+#include <catch2/catch_all.hpp>
 
 TEST_CASE("Check i/o files parsing", "ArgsParser") {
     const char* argv[] = {"sound_processor", "-i", "in.wav", "-o", "out.wav"};

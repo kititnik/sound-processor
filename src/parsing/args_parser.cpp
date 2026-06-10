@@ -28,17 +28,14 @@ void ArgsParser::parseArgs(int argc, const char* argv[]) {
             _filterDescriptors.push_back(std::move(filterDescriptor));
         }
         else {
-            throw std::runtime_error(
-                std::format("Wrong CLI input: unknown flag: {}", argv[i]));
+            throw std::runtime_error(std::format("Wrong CLI input: unknown flag: {}", argv[i]));
         }
     }
 }
 
-std::string_view ArgsParser::requireNext(int argvIdx, int argc, const char* argv[],
-                                         std::string_view flag) const {
+std::string_view ArgsParser::requireNext(int argvIdx, int argc, const char* argv[], std::string_view flag) const {
     if(argvIdx + 1 >= argc) {
-        throw std::runtime_error(
-            std::format("Wrong CLI input: missing value after {}", flag));
+        throw std::runtime_error(std::format("Wrong CLI input: missing value after {}", flag));
     }
     return argv[argvIdx + 1];
 }

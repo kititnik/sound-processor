@@ -1,7 +1,7 @@
-#include <catch2/catch_all.hpp>
-#include "pipeline.hpp"
 #include "filters/ampl_filter.hpp"
+#include "pipeline.hpp"
 #include "waveform.hpp"
+#include <catch2/catch_all.hpp>
 #include <memory>
 
 TEST_CASE("Pipeline applies filter", "Pipeline") {

@@ -2,8 +2,7 @@
 #include "wav_constants.hpp"
 #include <stdexcept>
 
-Waveform::Waveform(std::vector<int16_t> samples)
-    : _samples(std::move(samples)) {}
+Waveform::Waveform(std::vector<int16_t> samples): _samples(std::move(samples)) {}
 
 size_t Waveform::size() const {
     return _samples.size();

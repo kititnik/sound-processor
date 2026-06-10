@@ -1,7 +1,7 @@
-#include <catch2/catch_all.hpp>
 #include "wav_reader.hpp"
 #include "wav_writer.hpp"
 #include "waveform.hpp"
+#include <catch2/catch_all.hpp>
 #include <sstream>
 
 TEST_CASE("WavWriter/WavReader round-trip", "WavReader") {

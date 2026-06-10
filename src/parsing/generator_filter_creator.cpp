@@ -14,8 +14,8 @@ IFilter* GeneratorFilterCreator::operator()(const FilterDescriptor& filterDescri
     const std::string& type = filterDescriptor.params[0];
     auto producer = _filterRegistry.find(type);
     if(producer == nullptr) {
-        throw std::runtime_error(std::format(
-            "Unknown generator type: expected sin|am|fm, got: {}", type));
+        throw std::runtime_error(std::format("Unknown generator type: expected sin|am|fm, got: {}", type));
     }
-    return (*producer)(filterDescriptor);;
+    return (*producer)(filterDescriptor);
+    ;
 }

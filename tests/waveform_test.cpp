@@ -1,5 +1,5 @@
-#include <catch2/catch_all.hpp>
 #include "waveform.hpp"
+#include <catch2/catch_all.hpp>
 
 TEST_CASE("Waveform size", "Waveform") {
     Waveform w({1, 2, 3});

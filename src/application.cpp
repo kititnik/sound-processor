@@ -35,20 +35,17 @@ void Application::run(int argc, const char* argv[]) {
 
     if(argsParser.getInputFileName() != std::nullopt) {
         WavReader wavReader;
-        std::ifstream fileStream(argsParser.getInputFileName()->c_str(),
-                                 std::ifstream::binary);
+        std::ifstream fileStream(argsParser.getInputFileName()->c_str(), std::ifstream::binary);
         waveform = wavReader.read(fileStream);
     }
 
     const auto& filterDescriptors = argsParser.getFilterDescriptors();
-    Pipeline pipeline =
-        _cmdLineArgs2PipelineConverter.createPipeline(filterDescriptors);
+    Pipeline pipeline = _cmdLineArgs2PipelineConverter.createPipeline(filterDescriptors);
     pipeline.apply(&waveform);
 
     if(argsParser.getOutputFileName() != std::nullopt) {
         WavWriter wavWriter;
-        std::ofstream fileStream(argsParser.getOutputFileName()->c_str(),
-                                 std::ofstream::binary);
+        std::ofstream fileStream(argsParser.getOutputFileName()->c_str(), std::ofstream::binary);
         wavWriter.write(fileStream, waveform);
     }
 }

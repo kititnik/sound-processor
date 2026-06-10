@@ -17,8 +17,7 @@ void LowpassFilter::apply(Waveform* sound) {
     std::vector<int16_t> newSamples(sound->size());
 
     size_t sideLen = (_windowSize - 1) / 2;
-    size_t rightOutBoundLen =
-        sideLen >= sound->size() ? sideLen - sound->size() + 1 : 0;
+    size_t rightOutBoundLen = sideLen >= sound->size() ? sideLen - sound->size() + 1 : 0;
 
     double currentSum = sound->getSample(0) * (sideLen + 1);
 

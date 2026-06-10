@@ -7,8 +7,7 @@
 
 void WavWriter::write(std::ostream& ostr, const Waveform& waveform) const {
     size_t samplesSize = waveform.size() * sizeof(int16_t);
-    size_t fileSize = sizeof(RiffHeader) + sizeof(FmtHeader) +
-                      sizeof(DataChunkHeader) + samplesSize;
+    size_t fileSize = sizeof(RiffHeader) + sizeof(FmtHeader) + sizeof(DataChunkHeader) + samplesSize;
     writeRiffHeader(ostr, fileSize);
     writeFmtHeader(ostr);
     writeDataChunkHeader(ostr, samplesSize);
@@ -49,10 +48,8 @@ void WavWriter::writeDataChunkHeader(std::ostream& ostr, size_t samplesSize) con
     DataChunkHeader dataChunkHeader{};
     memcpy(&dataChunkHeader.chunkId, "data", 4);
     dataChunkHeader.chunkSize = samplesSize;
-    ostr.write(reinterpret_cast<char*>(&dataChunkHeader),
-               sizeof(dataChunkHeader));
+    ostr.write(reinterpret_cast<char*>(&dataChunkHeader), sizeof(dataChunkHeader));
     if(ostr.fail()) {
-        throw std::runtime_error(
-            "Output stream failed writing DATA CHUNK HEADER");
+        throw std::runtime_error("Output stream failed writing DATA CHUNK HEADER");
     }
 }

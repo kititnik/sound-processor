@@ -24,8 +24,7 @@ void TimestretchFilter::apply(Waveform* sound) {
             result[i] = sound->getSample(pastIdx);
         }
         else {
-            double newValue = sound->getSample(pastIdx) * (1.0 - frac) +
-                              sound->getSample(pastIdx + 1) * frac;
+            double newValue = sound->getSample(pastIdx) * (1.0 - frac) + sound->getSample(pastIdx + 1) * frac;
             result[i] = static_cast<int16_t>(newValue);
         }
     }

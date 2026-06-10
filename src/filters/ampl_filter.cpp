@@ -13,10 +13,8 @@ void AmplFilter::apply(Waveform* sound) {
     }
     for(size_t i = 0; i < sound->size(); i++) {
         double newSampleValue = sound->getSample(i) * _factor;
-        double clampedSampleValue = std::clamp(
-            newSampleValue,
-            static_cast<double>(std::numeric_limits<int16_t>::min()),
-            static_cast<double>(std::numeric_limits<int16_t>::max()));
+        double clampedSampleValue = std::clamp(newSampleValue, static_cast<double>(std::numeric_limits<int16_t>::min()),
+                                               static_cast<double>(std::numeric_limits<int16_t>::max()));
         sound->setSample(i, static_cast<int16_t>(clampedSampleValue));
     }
 }

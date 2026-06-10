@@ -4,8 +4,7 @@
 #include "waveform.hpp"
 #include <stdexcept>
 
-template<typename Filter>
-class AbstractGeneratorFilter : public IFilter {
+template <typename Filter> class AbstractGeneratorFilter: public IFilter {
 public:
     void apply(Waveform* sound) override {
         if(sound == nullptr) {
@@ -20,7 +19,7 @@ public:
     }
 
 protected:
-    AbstractGeneratorFilter(double durationMs) : _durationMs(durationMs) {}
+    AbstractGeneratorFilter(double durationMs): _durationMs(durationMs) {}
 
 private:
     double _durationMs;

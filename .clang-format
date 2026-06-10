@@ -2,7 +2,7 @@
 # LANGUAGE #
 ############
 
-ColumnLimit: 80 # The exact value isn't clear, but it's the most used 
+ColumnLimit: 120 # The exact value isn't clear, but it's the most used 
 
 ###########
 # INDENTS #

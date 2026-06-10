@@ -1,10 +1,10 @@
-#include <catch2/catch_all.hpp>
-#include "waveform.hpp"
 #include "filters/ampl_filter.hpp"
+#include "filters/lowpass_filter.hpp"
 #include "filters/normalize_filter.hpp"
 #include "filters/silence_filter.hpp"
-#include "filters/lowpass_filter.hpp"
 #include "filters/timestretch_filter.hpp"
+#include "waveform.hpp"
+#include <catch2/catch_all.hpp>
 
 TEST_CASE("AmplFilter factor 1.0 no change", "AmplFilter") {
     Waveform w({1, 3});

@@ -12,7 +12,6 @@ public:
 private:
     CmdLineArgs2PipelineConverter _cmdLineArgs2PipelineConverter;
     GeneratorFilterCreator _generatorCreator;
-    static constexpr std::string_view _helpMessage =
-        "Usage: sound_processor [-i input.wav] [-o output.wav] [-f filter "
-        "[params...]...]";
+    static constexpr std::string_view _helpMessage = "Usage: sound_processor [-i input.wav] [-o output.wav] [-f filter "
+                                                     "[params...]...]";
 };
