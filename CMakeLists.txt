@@ -37,7 +37,7 @@ if (BUILD_TESTS)
     FetchContent_MakeAvailable(Catch2)
     enable_testing()
 
-    add_executable(tests
+    add_executable(sound_processor_tests
         tests/waveform_test.cpp
         tests/wav_io_test.cpp
         tests/args_parser_test.cpp
@@ -62,7 +62,7 @@ if (BUILD_TESTS)
         src/parsing/generator_filter_creator.cpp
     )
 
-    target_include_directories(tests PRIVATE include/)
-    target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
-    add_test(NAME Tests COMMAND $<TARGET_FILE:tests>)
+    target_include_directories(sound_processor_tests PRIVATE include/)
+    target_link_libraries(sound_processor_tests PRIVATE Catch2::Catch2WithMain)
+    add_test(NAME Tests COMMAND $<TARGET_FILE:sound_processor_tests>)
 endif()
