@@ -4,10 +4,10 @@
 #include "parsing/filter_descriptor.hpp"
 #include <functional>
 #include <map>
+#include <memory>
 #include <string>
 
-// Create filter func type
-using FilterProducer = std::function<IFilter*(const FilterDescriptor&)>;
+using FilterProducer = std::function<std::unique_ptr<IFilter>(const FilterDescriptor&)>;
 
 // Maps filter names to their factory functions
 class FilterRegistry {

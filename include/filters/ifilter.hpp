@@ -9,5 +9,7 @@ public:
     virtual ~IFilter() = default;
     IFilter(const IFilter&) = delete;
     IFilter& operator=(const IFilter&) = delete;
+    IFilter(IFilter&&) = default;
+    IFilter& operator=(IFilter&&) = default;
     virtual void apply(Waveform* sound) = 0;
 };

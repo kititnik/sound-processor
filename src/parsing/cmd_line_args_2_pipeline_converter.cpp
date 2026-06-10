@@ -1,9 +1,7 @@
 #include "parsing/cmd_line_args_2_pipeline_converter.hpp"
-#include "filters/ifilter.hpp"
 #include "pipeline.hpp"
 #include <cstddef>
 #include <format>
-#include <memory>
 #include <stdexcept>
 
 void CmdLineArgs2PipelineConverter::addFilterProducer(const std::string& filterName,
@@ -20,12 +18,7 @@ Pipeline CmdLineArgs2PipelineConverter::createPipeline(const std::vector<FilterD
                                                  "should register your filter to use it",
                                                  filterDescriptors[i].name));
         }
-        IFilter* filter = (*producer)(filterDescriptors[i]);
-        if(filter == nullptr) {
-            throw std::runtime_error(std::format("Error creating pipeline: cannot create filter n. {} named {}", i,
-                                                 filterDescriptors[i].name));
-        }
-        pipeline.addFilter(std::unique_ptr<IFilter>(filter));
+        pipeline.addFilter((*producer)(filterDescriptors[i]));
     }
     return pipeline;
 }

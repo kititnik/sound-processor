@@ -8,9 +8,10 @@
 #include "filters/sin_gen_filter.hpp"
 #include "filters/timestretch_filter.hpp"
 #include <format>
+#include <memory>
 #include <stdexcept>
 
-IFilter* amplFilterCreator(const FilterDescriptor& filterDescriptor) {
+std::unique_ptr<IFilter> amplFilterCreator(const FilterDescriptor& filterDescriptor) {
     if(filterDescriptor.name != "ampl") {
         throw std::runtime_error("Wrong filter descriptor for ampl filter producer");
     }
@@ -29,10 +30,10 @@ IFilter* amplFilterCreator(const FilterDescriptor& filterDescriptor) {
                                              "or zero, got: {}",
                                              factor));
     }
-    return new AmplFilter(factor);
+    return std::make_unique<AmplFilter>(factor);
 }
 
-IFilter* normalizeFilterCreator(const FilterDescriptor& filterDescriptor) {
+std::unique_ptr<IFilter> normalizeFilterCreator(const FilterDescriptor& filterDescriptor) {
     if(filterDescriptor.name != "normalize") {
         throw std::runtime_error("Wrong filter descriptor for normalize filter producer");
     }
@@ -52,10 +53,10 @@ IFilter* normalizeFilterCreator(const FilterDescriptor& filterDescriptor) {
                 std::format("Wrong peak value for normalize filter: expected 0..1, got: {}", peak));
         }
     }
-    return new NormalizeFilter(peak);
+    return std::make_unique<NormalizeFilter>(peak);
 }
 
-IFilter* silenceFilterCreator(const FilterDescriptor& filterDescriptor) {
+std::unique_ptr<IFilter> silenceFilterCreator(const FilterDescriptor& filterDescriptor) {
     if(filterDescriptor.name != "silence") {
         throw std::runtime_error("Wrong filter descriptor for silence filter producer");
     }
@@ -88,10 +89,10 @@ IFilter* silenceFilterCreator(const FilterDescriptor& filterDescriptor) {
                                              "start({}), got: {}",
                                              start, end));
     }
-    return new SilenceFilter(unit, start, end);
+    return std::make_unique<SilenceFilter>(unit, start, end);
 }
 
-IFilter* timestretchFilterCreator(const FilterDescriptor& filterDescriptor) {
+std::unique_ptr<IFilter> timestretchFilterCreator(const FilterDescriptor& filterDescriptor) {
     if(filterDescriptor.name != "timestretch") {
         throw std::runtime_error("Wrong filter descriptor for timestretch filter producer");
     }
@@ -109,10 +110,10 @@ IFilter* timestretchFilterCreator(const FilterDescriptor& filterDescriptor) {
         throw std::runtime_error(
             std::format("Wrong factor value for timestretch filter: expected > 0, got: {}", factor));
     }
-    return new TimestretchFilter(factor);
+    return std::make_unique<TimestretchFilter>(factor);
 }
 
-IFilter* lowpassFilterCreator(const FilterDescriptor& filterDescriptor) {
+std::unique_ptr<IFilter> lowpassFilterCreator(const FilterDescriptor& filterDescriptor) {
     if(filterDescriptor.name != "lowpass") {
         throw std::runtime_error("Wrong filter descriptor for lowpass filter producer");
     }
@@ -130,10 +131,10 @@ IFilter* lowpassFilterCreator(const FilterDescriptor& filterDescriptor) {
         throw std::runtime_error(
             std::format("Wrong window size for lowpass filter: expected odd >= 1, got: {}", windowSize));
     }
-    return new LowpassFilter(static_cast<size_t>(windowSize));
+    return std::make_unique<LowpassFilter>(static_cast<size_t>(windowSize));
 }
 
-IFilter* sinGeneratorCreator(const FilterDescriptor& filterDescriptor) {
+std::unique_ptr<IFilter> sinGeneratorCreator(const FilterDescriptor& filterDescriptor) {
     if(filterDescriptor.params.size() != 3) {
         throw std::runtime_error("Wrong args count for generator sin: expected "
                                  "frequency_hz duration_ms");
@@ -160,10 +161,10 @@ IFilter* sinGeneratorCreator(const FilterDescriptor& filterDescriptor) {
         throw std::runtime_error(
             std::format("Wrong duration_ms for generator sin: expected >= 0, got: {}", durationMs));
     }
-    return new SinGenFilter(frequencyHz, durationMs);
+    return std::make_unique<SinGenFilter>(frequencyHz, durationMs);
 }
 
-IFilter* amGeneratorCreator(const FilterDescriptor& filterDescriptor) {
+std::unique_ptr<IFilter> amGeneratorCreator(const FilterDescriptor& filterDescriptor) {
     if(filterDescriptor.params.size() != 6) {
         throw std::runtime_error("Wrong args count for generator am: expected amplitude carrier_hz "
                                  "modulation_hz depth duration_ms");
@@ -219,10 +220,10 @@ IFilter* amGeneratorCreator(const FilterDescriptor& filterDescriptor) {
     if(durationMs < 0) {
         throw std::runtime_error(std::format("Wrong duration_ms for generator am: expected >= 0, got: {}", durationMs));
     }
-    return new AmSinGenFilter(amplitude, carrierHz, modulationHz, depth, durationMs);
+    return std::make_unique<AmSinGenFilter>(amplitude, carrierHz, modulationHz, depth, durationMs);
 }
 
-IFilter* fmGeneratorCreator(const FilterDescriptor& filterDescriptor) {
+std::unique_ptr<IFilter> fmGeneratorCreator(const FilterDescriptor& filterDescriptor) {
     if(filterDescriptor.params.size() != 6) {
         throw std::runtime_error("Wrong args count for generator fm: expected amplitude carrier_hz "
                                  "modulation_hz deviation_hz duration_ms");
@@ -279,5 +280,5 @@ IFilter* fmGeneratorCreator(const FilterDescriptor& filterDescriptor) {
     if(durationMs < 0) {
         throw std::runtime_error(std::format("Wrong duration_ms for generator fm: expected >= 0, got: {}", durationMs));
     }
-    return new FmSinGenFilter(amplitude, carrierHz, modulationHz, deviationHz, durationMs);
+    return std::make_unique<FmSinGenFilter>(amplitude, carrierHz, modulationHz, deviationHz, durationMs);
 }

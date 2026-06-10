@@ -11,7 +11,6 @@
 #include <optional>
 
 void Application::configure() {
-
     _cmdLineArgs2PipelineConverter.addFilterProducer("ampl", amplFilterCreator);
     _cmdLineArgs2PipelineConverter.addFilterProducer("normalize", normalizeFilterCreator);
     _cmdLineArgs2PipelineConverter.addFilterProducer("silence", silenceFilterCreator);
@@ -27,6 +26,7 @@ void Application::configure() {
 void Application::run(int argc, const char* argv[]) {
     if(argc == 1) {
         std::cout << _helpMessage << '\n';
+        return;
     }
 
     ArgsParser argsParser;

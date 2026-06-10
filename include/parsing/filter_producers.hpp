@@ -2,12 +2,13 @@
 
 #include "filters/ifilter.hpp"
 #include "parsing/filter_descriptor.hpp"
+#include <memory>
 
-IFilter* amplFilterCreator(const FilterDescriptor& filterDescriptor);
-IFilter* normalizeFilterCreator(const FilterDescriptor& filterDescriptor);
-IFilter* silenceFilterCreator(const FilterDescriptor& filterDescriptor);
-IFilter* timestretchFilterCreator(const FilterDescriptor& filterDescriptor);
-IFilter* lowpassFilterCreator(const FilterDescriptor& filterDescriptor);
-IFilter* sinGeneratorCreator(const FilterDescriptor& filterDescriptor);
-IFilter* amGeneratorCreator(const FilterDescriptor& filterDescriptor);
-IFilter* fmGeneratorCreator(const FilterDescriptor& filterDescriptor);
+std::unique_ptr<IFilter> amplFilterCreator(const FilterDescriptor& filterDescriptor);
+std::unique_ptr<IFilter> normalizeFilterCreator(const FilterDescriptor& filterDescriptor);
+std::unique_ptr<IFilter> silenceFilterCreator(const FilterDescriptor& filterDescriptor);
+std::unique_ptr<IFilter> timestretchFilterCreator(const FilterDescriptor& filterDescriptor);
+std::unique_ptr<IFilter> lowpassFilterCreator(const FilterDescriptor& filterDescriptor);
+std::unique_ptr<IFilter> sinGeneratorCreator(const FilterDescriptor& filterDescriptor);
+std::unique_ptr<IFilter> amGeneratorCreator(const FilterDescriptor& filterDescriptor);
+std::unique_ptr<IFilter> fmGeneratorCreator(const FilterDescriptor& filterDescriptor);
