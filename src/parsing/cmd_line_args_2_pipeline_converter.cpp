@@ -6,13 +6,11 @@
 #include <memory>
 #include <stdexcept>
 
-void CmdLineArgs2PipelineConverter::addFilterProducer(
-    std::string filterName, FilterProducer filterProducer) {
+void CmdLineArgs2PipelineConverter::addFilterProducer(std::string filterName, FilterProducer filterProducer) {
     _producers.emplace(filterName, filterProducer);
 }
 
-Pipeline CmdLineArgs2PipelineConverter::createPipeline(
-    const std::vector<FilterDescriptor>& filterDescriptors) const {
+Pipeline CmdLineArgs2PipelineConverter::createPipeline(const std::vector<FilterDescriptor>& filterDescriptors) const {
     Pipeline pipeline;
     for(size_t i = 0; i < filterDescriptors.size(); i++) {
         auto producersMapIt = _producers.find(filterDescriptors[i].name);

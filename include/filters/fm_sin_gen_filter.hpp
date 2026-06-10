@@ -2,13 +2,11 @@
 
 #include "abstract_generator_filter.hpp"
 
-class FmSinGenFilter: public AbstractGeneratorFilter {
+class FmSinGenFilter : public AbstractGeneratorFilter<FmSinGenFilter> {
 public:
     FmSinGenFilter(double amplitude, double carrierHz, double modulationHz,
                    double deviationHz, double durationMs);
-
-protected:
-    int16_t computeSample(double sampleSec) const override;
+    int16_t computeSample(double sampleSec) const;
 
 private:
     double _amplitude;

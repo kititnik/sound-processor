@@ -2,12 +2,10 @@
 
 #include "abstract_generator_filter.hpp"
 
-class SinGenFilter: public AbstractGeneratorFilter {
+class SinGenFilter : public AbstractGeneratorFilter<SinGenFilter> {
 public:
     SinGenFilter(double frequencyHz, double durationMs);
-
-protected:
-    int16_t computeSample(double sampleSec) const override;
+    int16_t computeSample(double sampleSec) const;
 
 private:
     double _frequencyHz;

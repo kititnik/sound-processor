@@ -8,7 +8,7 @@
 AmSinGenFilter::AmSinGenFilter(double amplitude, double carrierHz,
                                double modulationHz, double depth,
                                double durationMs)
-    : AbstractGeneratorFilter(durationMs), _amplitude(amplitude),
+    : AbstractGeneratorFilter<AmSinGenFilter>(durationMs), _amplitude(amplitude),
       _carrierHz(carrierHz), _modulationHz(modulationHz), _depth(depth) {}
 
 int16_t AmSinGenFilter::computeSample(double sampleSec) const {

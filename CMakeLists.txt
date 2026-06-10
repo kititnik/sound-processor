@@ -15,7 +15,6 @@ add_executable(sound_processor
     src/filters/silence_filter.cpp
     src/filters/timestretch_filter.cpp
     src/filters/lowpass_filter.cpp
-    src/filters/abstract_generator_filter.cpp
     src/filters/sin_gen_filter.cpp
     src/filters/am_sin_gen_filter.cpp
     src/filters/fm_sin_gen_filter.cpp
@@ -51,7 +50,6 @@ if (BUILD_TESTS)
         src/filters/silence_filter.cpp
         src/filters/timestretch_filter.cpp
         src/filters/lowpass_filter.cpp
-        src/filters/abstract_generator_filter.cpp
         src/filters/sin_gen_filter.cpp
         src/filters/am_sin_gen_filter.cpp
         src/filters/fm_sin_gen_filter.cpp

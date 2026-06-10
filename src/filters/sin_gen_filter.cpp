@@ -6,7 +6,7 @@
 #include <numbers>
 
 SinGenFilter::SinGenFilter(double frequencyHz, double durationMs)
-    : AbstractGeneratorFilter(durationMs), _frequencyHz(frequencyHz) {}
+    : AbstractGeneratorFilter<SinGenFilter>(durationMs), _frequencyHz(frequencyHz) {}
 
 int16_t SinGenFilter::computeSample(double sampleSec) const {
     double value =

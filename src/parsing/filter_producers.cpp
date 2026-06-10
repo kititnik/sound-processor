@@ -8,6 +8,7 @@
 #include "filters/sin_gen_filter.hpp"
 #include "filters/timestretch_filter.hpp"
 #include <format>
+#include <map>
 #include <stdexcept>
 
 IFilter* amplFilterCreator(const FilterDescriptor& filterDescriptor) {
@@ -349,16 +350,17 @@ IFilter* generatorFilterCreator(const FilterDescriptor& filterDescriptor) {
         throw std::runtime_error("Wrong args count for generator filter: "
                                  "expected sin|am|fm as first argument");
     }
+    static const std::map<std::string, IFilter* (*)(const FilterDescriptor&)>
+        generators = {
+            {"sin", sinGeneratorCreator},
+            {"am",  amGeneratorCreator},
+            {"fm",  fmGeneratorCreator},
+        };
     const std::string& type = filterDescriptor.params[0];
-    if(type == "sin") {
-        return sinGeneratorCreator(filterDescriptor);
+    auto it = generators.find(type);
+    if(it == generators.end()) {
+        throw std::runtime_error(std::format(
+            "Unknown generator type: expected sin|am|fm, got: {}", type));
     }
-    if(type == "am") {
-        return amGeneratorCreator(filterDescriptor);
-    }
-    if(type == "fm") {
-        return fmGeneratorCreator(filterDescriptor);
-    }
-    throw std::runtime_error(std::format(
-        "Unknown generator type: expected sin/am/fm, got: {}", type));
+    return it->second(filterDescriptor);
 }

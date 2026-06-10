@@ -8,7 +8,7 @@
 FmSinGenFilter::FmSinGenFilter(double amplitude, double carrierHz,
                                double modulationHz, double deviationHz,
                                double durationMs)
-    : AbstractGeneratorFilter(durationMs), _amplitude(amplitude),
+    : AbstractGeneratorFilter<FmSinGenFilter>(durationMs), _amplitude(amplitude),
       _carrierHz(carrierHz), _modulationHz(modulationHz),
       _deviationHz(deviationHz) {}
 

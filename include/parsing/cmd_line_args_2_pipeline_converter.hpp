@@ -14,7 +14,10 @@ public:
     createPipeline(const std::vector<FilterDescriptor>& filterDescriptors) const;
     void addFilterProducer(std::string filterName,
                            FilterProducer filterProducer);
+    void addGeneratorFilterProducer(std::string filterName,
+                           FilterProducer filterProducer);
 
 private:
     std::map<std::string, FilterProducer> _producers;
+    std::map<std::string, FilterProducer> _generatorProducers;
 };
