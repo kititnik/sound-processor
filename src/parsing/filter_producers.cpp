@@ -158,7 +158,7 @@ IFilter* lowpassFilterCreator(const FilterDescriptor& filterDescriptor) {
     return new LowpassFilter(static_cast<size_t>(windowSize));
 }
 
-static IFilter* sinGeneratorCreator(const FilterDescriptor& filterDescriptor) {
+IFilter* sinGeneratorCreator(const FilterDescriptor& filterDescriptor) {
     if(filterDescriptor.params.size() != 3) {
         throw std::runtime_error("Wrong args count for generator sin: expected "
                                  "frequency_hz duration_ms");
@@ -192,7 +192,7 @@ static IFilter* sinGeneratorCreator(const FilterDescriptor& filterDescriptor) {
     return new SinGenFilter(frequencyHz, durationMs);
 }
 
-static IFilter* amGeneratorCreator(const FilterDescriptor& filterDescriptor) {
+IFilter* amGeneratorCreator(const FilterDescriptor& filterDescriptor) {
     if(filterDescriptor.params.size() != 6) {
         throw std::runtime_error(
             "Wrong args count for generator am: expected amplitude carrier_hz "
@@ -266,7 +266,7 @@ static IFilter* amGeneratorCreator(const FilterDescriptor& filterDescriptor) {
                               durationMs);
 }
 
-static IFilter* fmGeneratorCreator(const FilterDescriptor& filterDescriptor) {
+IFilter* fmGeneratorCreator(const FilterDescriptor& filterDescriptor) {
     if(filterDescriptor.params.size() != 6) {
         throw std::runtime_error(
             "Wrong args count for generator fm: expected amplitude carrier_hz "
@@ -339,28 +339,4 @@ static IFilter* fmGeneratorCreator(const FilterDescriptor& filterDescriptor) {
     }
     return new FmSinGenFilter(amplitude, carrierHz, modulationHz, deviationHz,
                               durationMs);
-}
-
-IFilter* generatorFilterCreator(const FilterDescriptor& filterDescriptor) {
-    if(filterDescriptor.name != "generator") {
-        throw std::runtime_error(
-            "Wrong filter descriptor for generator filter producer");
-    }
-    if(filterDescriptor.params.empty()) {
-        throw std::runtime_error("Wrong args count for generator filter: "
-                                 "expected sin|am|fm as first argument");
-    }
-    static const std::map<std::string, IFilter* (*)(const FilterDescriptor&)>
-        generators = {
-            {"sin", sinGeneratorCreator},
-            {"am",  amGeneratorCreator},
-            {"fm",  fmGeneratorCreator},
-        };
-    const std::string& type = filterDescriptor.params[0];
-    auto it = generators.find(type);
-    if(it == generators.end()) {
-        throw std::runtime_error(std::format(
-            "Unknown generator type: expected sin|am|fm, got: {}", type));
-    }
-    return it->second(filterDescriptor);
 }

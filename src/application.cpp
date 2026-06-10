@@ -13,16 +13,14 @@
 void Application::configure() {
 
     _cmdLineArgs2PipelineConverter.addFilterProducer("ampl", amplFilterCreator);
-    _cmdLineArgs2PipelineConverter.addFilterProducer("normalize",
-                                                     normalizeFilterCreator);
-    _cmdLineArgs2PipelineConverter.addFilterProducer("silence",
-                                                     silenceFilterCreator);
-    _cmdLineArgs2PipelineConverter.addFilterProducer("timestretch",
-                                                     timestretchFilterCreator);
-    _cmdLineArgs2PipelineConverter.addFilterProducer("lowpass",
-                                                     lowpassFilterCreator);
-    _cmdLineArgs2PipelineConverter.addFilterProducer("generator",
-                                                     generatorFilterCreator);
+    _cmdLineArgs2PipelineConverter.addFilterProducer("normalize", normalizeFilterCreator);
+    _cmdLineArgs2PipelineConverter.addFilterProducer("silence", silenceFilterCreator);
+    _cmdLineArgs2PipelineConverter.addFilterProducer("timestretch", timestretchFilterCreator);
+    _cmdLineArgs2PipelineConverter.addFilterProducer("lowpass", lowpassFilterCreator);
+    _cmdLineArgs2PipelineConverter.addFilterProducer("generator", _generatorCreator);
+    _generatorCreator.addGeneratorProducer("sin", sinGeneratorCreator);
+    _generatorCreator.addGeneratorProducer("am", amGeneratorCreator);
+    _generatorCreator.addGeneratorProducer("fm", fmGeneratorCreator);
 }
 
 void Application::run(int argc, const char* argv[]) {

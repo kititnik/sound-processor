@@ -8,4 +8,6 @@ IFilter* normalizeFilterCreator(const FilterDescriptor& filterDescriptor);
 IFilter* silenceFilterCreator(const FilterDescriptor& filterDescriptor);
 IFilter* timestretchFilterCreator(const FilterDescriptor& filterDescriptor);
 IFilter* lowpassFilterCreator(const FilterDescriptor& filterDescriptor);
-IFilter* generatorFilterCreator(const FilterDescriptor& filterDescriptor);
+IFilter* sinGeneratorCreator(const FilterDescriptor& filterDescriptor);
+IFilter* amGeneratorCreator(const FilterDescriptor& filterDescriptor);
+IFilter* fmGeneratorCreator(const FilterDescriptor& filterDescriptor);

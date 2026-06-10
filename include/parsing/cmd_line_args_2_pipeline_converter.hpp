@@ -1,23 +1,16 @@
 #pragma once
 
-#include "filters/ifilter.hpp"
+#include "parsing/filter_registry.hpp"
 #include "parsing/filter_descriptor.hpp"
 #include "pipeline.hpp"
-#include <map>
 #include <string>
-
-using FilterProducer = IFilter* (*)(const FilterDescriptor&);
 
 class CmdLineArgs2PipelineConverter {
 public:
     Pipeline
     createPipeline(const std::vector<FilterDescriptor>& filterDescriptors) const;
-    void addFilterProducer(std::string filterName,
-                           FilterProducer filterProducer);
-    void addGeneratorFilterProducer(std::string filterName,
-                           FilterProducer filterProducer);
+    void addFilterProducer(const std::string& filterName, const FilterProducer& filterProducer);
 
 private:
-    std::map<std::string, FilterProducer> _producers;
-    std::map<std::string, FilterProducer> _generatorProducers;
+    FilterRegistry _filterRegistry;
 };

@@ -21,6 +21,8 @@ add_executable(sound_processor
     src/parsing/args_parser.cpp
     src/parsing/cmd_line_args_2_pipeline_converter.cpp
     src/parsing/filter_producers.cpp
+    src/parsing/filter_registry.cpp
+    src/parsing/generator_filter_creator.cpp
 )
 
 target_include_directories(sound_processor PRIVATE include/)
@@ -56,6 +58,8 @@ if (BUILD_TESTS)
         src/parsing/args_parser.cpp
         src/parsing/cmd_line_args_2_pipeline_converter.cpp
         src/parsing/filter_producers.cpp
+        src/parsing/filter_registry.cpp
+        src/parsing/generator_filter_creator.cpp
     )
 
     target_include_directories(tests PRIVATE include/)

@@ -6,21 +6,21 @@
 #include <memory>
 #include <stdexcept>
 
-void CmdLineArgs2PipelineConverter::addFilterProducer(std::string filterName, FilterProducer filterProducer) {
-    _producers.emplace(filterName, filterProducer);
+void CmdLineArgs2PipelineConverter::addFilterProducer(const std::string& filterName, const FilterProducer& filterProducer) {
+    _filterRegistry.add(filterName, filterProducer);
 }
 
 Pipeline CmdLineArgs2PipelineConverter::createPipeline(const std::vector<FilterDescriptor>& filterDescriptors) const {
     Pipeline pipeline;
     for(size_t i = 0; i < filterDescriptors.size(); i++) {
-        auto producersMapIt = _producers.find(filterDescriptors[i].name);
-        if(producersMapIt == _producers.end()) {
+        auto producer = _filterRegistry.find(filterDescriptors[i].name);
+        if(producer == nullptr) {
             throw std::runtime_error(
                 std::format("Error creating pipeline. Unknown filter: {}. You "
                             "should register your filter to use it",
                             filterDescriptors[i].name));
         }
-        IFilter* filter = producersMapIt->second(filterDescriptors[i]);
+        IFilter* filter = (*producer)(filterDescriptors[i]);
         if(filter == nullptr) {
             throw std::runtime_error(std::format(
                 "Error creating pipeline: cannot create filter n. {} named {}",
