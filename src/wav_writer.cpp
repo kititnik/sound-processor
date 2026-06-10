@@ -5,7 +5,7 @@
 #include <cstdint>
 #include <cstring>
 
-void WavWriter::write(std::ostream& ostr, const Waveform& waveform) {
+void WavWriter::write(std::ostream& ostr, const Waveform& waveform) const {
     size_t samplesSize = waveform.size() * sizeof(int16_t);
     size_t fileSize = sizeof(RiffHeader) + sizeof(FmtHeader) +
                       sizeof(DataChunkHeader) + samplesSize;
@@ -18,7 +18,7 @@ void WavWriter::write(std::ostream& ostr, const Waveform& waveform) {
     }
 }
 
-void WavWriter::writeRiffHeader(std::ostream& ostr, size_t fileSize) {
+void WavWriter::writeRiffHeader(std::ostream& ostr, size_t fileSize) const {
     RiffHeader riffHeader{};
     memcpy(&riffHeader.chunkId, "RIFF", 4);
     riffHeader.chunkSize = fileSize - 8;
@@ -29,7 +29,7 @@ void WavWriter::writeRiffHeader(std::ostream& ostr, size_t fileSize) {
     }
 }
 
-void WavWriter::writeFmtHeader(std::ostream& ostr) {
+void WavWriter::writeFmtHeader(std::ostream& ostr) const {
     FmtHeader fmtHeader{};
     memcpy(&fmtHeader.chunkId, "fmt ", 4);
     fmtHeader.chunkSize = 16;
@@ -45,7 +45,7 @@ void WavWriter::writeFmtHeader(std::ostream& ostr) {
     }
 }
 
-void WavWriter::writeDataChunkHeader(std::ostream& ostr, size_t samplesSize) {
+void WavWriter::writeDataChunkHeader(std::ostream& ostr, size_t samplesSize) const {
     DataChunkHeader dataChunkHeader{};
     memcpy(&dataChunkHeader.chunkId, "data", 4);
     dataChunkHeader.chunkSize = samplesSize;

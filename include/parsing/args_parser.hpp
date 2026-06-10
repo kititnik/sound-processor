@@ -16,7 +16,7 @@ public:
 
 private:
     std::string_view requireNext(int argvIdx, int argc, const char* argv[],
-                                 std::string_view flag);
+                                 std::string_view flag) const;
 
     std::optional<std::string> _inputFileName;
     std::optional<std::string> _outputFileName;

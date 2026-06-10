@@ -12,7 +12,7 @@
 constexpr std::string_view FILE_FORMAT_ERROR =
     "Wrong file format! {} mismatch. Expected: {}. Got {}";
 
-Waveform WavReader::read(std::istream& istr) {
+Waveform WavReader::read(std::istream& istr) const {
     RiffHeader riffHeader;
     istr.read(reinterpret_cast<char*>(&riffHeader), sizeof(riffHeader));
     if(istr.fail()) {

@@ -6,10 +6,10 @@
 
 class WavWriter {
 public:
-    void write(std::ostream& ostr, const Waveform& waveform);
+    void write(std::ostream& ostr, const Waveform& waveform) const;
 
 private:
-    void writeRiffHeader(std::ostream& ostr, size_t fileSize);
-    void writeFmtHeader(std::ostream& ostr);
-    void writeDataChunkHeader(std::ostream& ostr, size_t samplesSize);
+    void writeRiffHeader(std::ostream& ostr, size_t fileSize) const;
+    void writeFmtHeader(std::ostream& ostr) const;
+    void writeDataChunkHeader(std::ostream& ostr, size_t samplesSize) const;
 };

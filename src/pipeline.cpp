@@ -11,6 +11,6 @@ void Pipeline::apply(Waveform* waveform) {
     }
 }
 
-size_t Pipeline::getFilterCount() {
+size_t Pipeline::getFilterCount() const {
     return _filters.size();
 }

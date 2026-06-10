@@ -11,7 +11,7 @@ using FilterProducer = IFilter* (*)(const FilterDescriptor&);
 class CmdLineArgs2PipelineConverter {
 public:
     Pipeline
-    createPipeline(const std::vector<FilterDescriptor>& filterDescriptors);
+    createPipeline(const std::vector<FilterDescriptor>& filterDescriptors) const;
     void addFilterProducer(std::string filterName,
                            FilterProducer filterProducer);
 

@@ -12,7 +12,7 @@ void CmdLineArgs2PipelineConverter::addFilterProducer(
 }
 
 Pipeline CmdLineArgs2PipelineConverter::createPipeline(
-    const std::vector<FilterDescriptor>& filterDescriptors) {
+    const std::vector<FilterDescriptor>& filterDescriptors) const {
     Pipeline pipeline;
     for(size_t i = 0; i < filterDescriptors.size(); i++) {
         auto producersMapIt = _producers.find(filterDescriptors[i].name);

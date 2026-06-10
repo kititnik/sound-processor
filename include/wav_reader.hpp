@@ -6,7 +6,7 @@
 
 class WavReader {
 public:
-    Waveform read(std::istream& istr);
+    Waveform read(std::istream& istr) const;
 
 private:
     static void validateRiffHeader(const RiffHeader& header);

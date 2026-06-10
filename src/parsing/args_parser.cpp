@@ -35,7 +35,7 @@ void ArgsParser::parseArgs(int argc, const char* argv[]) {
 }
 
 std::string_view ArgsParser::requireNext(int argvIdx, int argc, const char* argv[],
-                                         std::string_view flag) {
+                                         std::string_view flag) const {
     if(argvIdx + 1 >= argc) {
         throw std::runtime_error(
             std::format("Wrong CLI input: missing value after {}", flag));
