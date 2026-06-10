@@ -11,6 +11,7 @@ IFilter* GeneratorFilterCreator::operator()(const FilterDescriptor& filterDescri
         throw std::runtime_error("Wrong args count for generator filter: "
                                  "expected sin|am|fm as first argument");
     }
+    // First param is generator subtype (sin|am|fm)
     const std::string& type = filterDescriptor.params[0];
     auto producer = _filterRegistry.find(type);
     if(producer == nullptr) {

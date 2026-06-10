@@ -15,6 +15,7 @@ public:
     int16_t getSample(size_t idx) const;
 
     void setSample(size_t idx, int16_t value);
+    // Inserts count samples filled with value at position pos
     void insert(size_t pos, size_t count, int16_t value);
     void resize(size_t newSize);
 

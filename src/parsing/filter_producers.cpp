@@ -8,7 +8,6 @@
 #include "filters/sin_gen_filter.hpp"
 #include "filters/timestretch_filter.hpp"
 #include <format>
-#include <map>
 #include <stdexcept>
 
 IFilter* amplFilterCreator(const FilterDescriptor& filterDescriptor) {

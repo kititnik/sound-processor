@@ -17,6 +17,7 @@ void Application::configure() {
     _cmdLineArgs2PipelineConverter.addFilterProducer("silence", silenceFilterCreator);
     _cmdLineArgs2PipelineConverter.addFilterProducer("timestretch", timestretchFilterCreator);
     _cmdLineArgs2PipelineConverter.addFilterProducer("lowpass", lowpassFilterCreator);
+    // _generatorCreator used as FilterProducer via operator()
     _cmdLineArgs2PipelineConverter.addFilterProducer("generator", _generatorCreator);
     _generatorCreator.addGeneratorProducer("sin", sinGeneratorCreator);
     _generatorCreator.addGeneratorProducer("am", amGeneratorCreator);

@@ -20,6 +20,7 @@ void WavWriter::write(std::ostream& ostr, const Waveform& waveform) const {
 void WavWriter::writeRiffHeader(std::ostream& ostr, size_t fileSize) const {
     RiffHeader riffHeader{};
     memcpy(&riffHeader.chunkId, "RIFF", 4);
+    // -8 for RIFF header
     riffHeader.chunkSize = fileSize - 8;
     memcpy(&riffHeader.waveId, "WAVE", 4);
     ostr.write(reinterpret_cast<char*>(&riffHeader), sizeof(riffHeader));

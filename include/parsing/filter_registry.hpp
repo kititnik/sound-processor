@@ -6,8 +6,10 @@
 #include <map>
 #include <string>
 
+// Create filter func type
 using FilterProducer = std::function<IFilter*(const FilterDescriptor&)>;
 
+// Maps filter names to their factory functions
 class FilterRegistry {
 public:
     void add(const std::string& name, const FilterProducer& producer);
