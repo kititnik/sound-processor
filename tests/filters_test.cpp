@@ -3,6 +3,9 @@
 #include "filters/normalize_filter.hpp"
 #include "filters/silence_filter.hpp"
 #include "filters/timestretch_filter.hpp"
+#include "filters/repeat_filter.hpp"
+#include "filters/reverse_filter.hpp"
+#include "filters/fade_filter.hpp"
 #include "waveform.hpp"
 #include <catch2/catch_all.hpp>
 
@@ -68,4 +71,49 @@ TEST_CASE("TimestretchFilter factor 2.0 doubles size", "TimestretchFilter") {
     TimestretchFilter f(2.0);
     f.apply(&w);
     REQUIRE(w.size() == 4);
+}
+
+TEST_CASE("ReverseFilter reverses sample order", "ReverseFilter") {
+    Waveform w({100, 200, 300});
+    ReverseFilter f;
+    f.apply(&w);
+    REQUIRE(w.getSample(0) == 300);
+    REQUIRE(w.getSample(1) == 200);
+    REQUIRE(w.getSample(2) == 100);
+}
+
+TEST_CASE("RepeatFilter count 1 no change", "RepeatFilter") {
+    Waveform w({100, 200});
+    RepeatFilter f(1);
+    f.apply(&w);
+    REQUIRE(w.size() == 2);
+    REQUIRE(w.getSample(0) == 100);
+    REQUIRE(w.getSample(1) == 200);
+}
+
+TEST_CASE("RepeatFilter count 2 doubles size", "RepeatFilter") {
+    Waveform w({100, 200});
+    RepeatFilter f(2);
+    f.apply(&w);
+    REQUIRE(w.size() == 4);
+    REQUIRE(w.getSample(0) == 100);
+    REQUIRE(w.getSample(1) == 200);
+    REQUIRE(w.getSample(2) == 100);
+    REQUIRE(w.getSample(3) == 200);
+}
+
+TEST_CASE("FadeFilter in zeroes first sample", "FadeFilter") {
+    Waveform w({1000, 2000, 3000, 4000});
+    double durationMs = Waveform::samplesToMs(4);
+    FadeFilter f("in", durationMs);
+    f.apply(&w);
+    REQUIRE(w.getSample(0) == 0);
+}
+
+TEST_CASE("FadeFilter in last fade sample unchanged", "FadeFilter") {
+    Waveform w({1000, 2000, 3000, 4000});
+    double durationMs = Waveform::samplesToMs(4);
+    FadeFilter f("in", durationMs);
+    f.apply(&w);
+    REQUIRE(w.getSample(3) == 4000);
 }

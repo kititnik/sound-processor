@@ -4,7 +4,7 @@
 #include "waveform.hpp"
 #include <stdexcept>
 
-// Base class for generator filters, subclass must implement computeSample(double sampleSec)
+/** Base class for generator filters, subclass must implement computeSample(double sampleSec) */
 template <typename Filter> class AbstractGeneratorFilter: public IFilter {
 public:
     void apply(Waveform* sound) override {

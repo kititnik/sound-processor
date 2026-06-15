@@ -16,6 +16,9 @@ void Application::configure() {
     _cmdLineArgs2PipelineConverter.addFilterProducer("silence", silenceFilterCreator);
     _cmdLineArgs2PipelineConverter.addFilterProducer("timestretch", timestretchFilterCreator);
     _cmdLineArgs2PipelineConverter.addFilterProducer("lowpass", lowpassFilterCreator);
+    _cmdLineArgs2PipelineConverter.addFilterProducer("reverse", reverseFilterCreator);
+    _cmdLineArgs2PipelineConverter.addFilterProducer("repeat", repeatFilterCreator);
+    _cmdLineArgs2PipelineConverter.addFilterProducer("fade", fadeFilterCreator);
     // _generatorCreator used as FilterProducer via operator()
     _cmdLineArgs2PipelineConverter.addFilterProducer("generator", _generatorCreator);
     _generatorCreator.addGeneratorProducer("sin", sinGeneratorCreator);

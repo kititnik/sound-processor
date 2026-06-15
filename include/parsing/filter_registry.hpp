@@ -9,7 +9,7 @@
 
 using FilterProducer = std::function<std::unique_ptr<IFilter>(const FilterDescriptor&)>;
 
-// Maps filter names to their factory functions
+/** Maps filter names to their factory functions */
 class FilterRegistry {
 public:
     void add(const std::string& name, const FilterProducer& producer);

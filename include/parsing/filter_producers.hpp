@@ -12,3 +12,6 @@ std::unique_ptr<IFilter> lowpassFilterCreator(const FilterDescriptor& filterDesc
 std::unique_ptr<IFilter> sinGeneratorCreator(const FilterDescriptor& filterDescriptor);
 std::unique_ptr<IFilter> amGeneratorCreator(const FilterDescriptor& filterDescriptor);
 std::unique_ptr<IFilter> fmGeneratorCreator(const FilterDescriptor& filterDescriptor);
+std::unique_ptr<IFilter> reverseFilterCreator(const FilterDescriptor& filterDescriptor);
+std::unique_ptr<IFilter> repeatFilterCreator(const FilterDescriptor& filterDescriptor);
+std::unique_ptr<IFilter> fadeFilterCreator(const FilterDescriptor& filterDescriptor);

@@ -5,7 +5,7 @@
 #include "pipeline.hpp"
 #include <string>
 
-// Builds pipeline from filter descriptors
+/** Builds pipeline from filter descriptors */
 class CmdLineArgs2PipelineConverter {
 public:
     Pipeline createPipeline(const std::vector<FilterDescriptor>& filterDescriptors) const;

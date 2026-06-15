@@ -2,7 +2,7 @@
 
 #include "waveform.hpp"
 
-// Base interface for all audio filters
+/** Base interface for all audio filters */
 class IFilter {
 public:
     IFilter() = default;

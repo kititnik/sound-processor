@@ -18,6 +18,9 @@ add_executable(sound_processor
     src/filters/sin_gen_filter.cpp
     src/filters/am_sin_gen_filter.cpp
     src/filters/fm_sin_gen_filter.cpp
+    src/filters/reverse_filter.cpp
+    src/filters/repeat_filter.cpp
+    src/filters/fade_filter.cpp
     src/parsing/args_parser.cpp
     src/parsing/cmd_line_args_2_pipeline_converter.cpp
     src/parsing/filter_producers.cpp
@@ -26,6 +29,13 @@ add_executable(sound_processor
 )
 
 target_include_directories(sound_processor PRIVATE include/)
+
+find_package(Doxygen OPTIONAL_COMPONENTS dot)
+if (DOXYGEN_FOUND)
+    set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/docs)
+    set(DOXYGEN_RECURSIVE YES)
+    doxygen_add_docs(docs include/ ALL)
+endif()
 
 if (BUILD_TESTS)
     include(FetchContent)
@@ -55,6 +65,9 @@ if (BUILD_TESTS)
         src/filters/sin_gen_filter.cpp
         src/filters/am_sin_gen_filter.cpp
         src/filters/fm_sin_gen_filter.cpp
+        src/filters/reverse_filter.cpp
+        src/filters/repeat_filter.cpp
+        src/filters/fade_filter.cpp
         src/parsing/args_parser.cpp
         src/parsing/cmd_line_args_2_pipeline_converter.cpp
         src/parsing/filter_producers.cpp

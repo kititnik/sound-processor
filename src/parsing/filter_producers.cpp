@@ -7,6 +7,9 @@
 #include "filters/silence_filter.hpp"
 #include "filters/sin_gen_filter.hpp"
 #include "filters/timestretch_filter.hpp"
+#include "filters/repeat_filter.hpp"
+#include "filters/reverse_filter.hpp"
+#include "filters/fade_filter.hpp"
 #include <format>
 #include <memory>
 #include <stdexcept>
@@ -221,6 +224,63 @@ std::unique_ptr<IFilter> amGeneratorCreator(const FilterDescriptor& filterDescri
         throw std::runtime_error(std::format("Wrong duration_ms for generator am: expected >= 0, got: {}", durationMs));
     }
     return std::make_unique<AmSinGenFilter>(amplitude, carrierHz, modulationHz, depth, durationMs);
+}
+
+std::unique_ptr<IFilter> reverseFilterCreator(const FilterDescriptor& filterDescriptor) {
+    if(filterDescriptor.name != "reverse") {
+        throw std::runtime_error("Wrong filter descriptor for reverse filter producer");
+    }
+    if(!filterDescriptor.params.empty()) {
+        throw std::runtime_error("Wrong args count for reverse filter producer");
+    }
+    return std::make_unique<ReverseFilter>();
+}
+
+std::unique_ptr<IFilter> repeatFilterCreator(const FilterDescriptor& filterDescriptor) {
+    if(filterDescriptor.name != "repeat") {
+        throw std::runtime_error("Wrong filter descriptor for repeat filter producer");
+    }
+    if(filterDescriptor.params.size() != 1) {
+        throw std::runtime_error("Wrong args count for repeat filter producer");
+    }
+    unsigned long count = 0;
+    try {
+        count = std::stoul(filterDescriptor.params[0]);
+    }
+    catch(std::exception& exception) {
+        throw std::runtime_error("Error converting the 1st argument of repeat filter");
+    }
+    if(count < 1) {
+        throw std::runtime_error(
+            std::format("Wrong count for repeat filter: expected >= 1, got: {}", count));
+    }
+    return std::make_unique<RepeatFilter>(static_cast<size_t>(count));
+}
+
+std::unique_ptr<IFilter> fadeFilterCreator(const FilterDescriptor& filterDescriptor) {
+    if(filterDescriptor.name != "fade") {
+        throw std::runtime_error("Wrong filter descriptor for fade filter producer");
+    }
+    if(filterDescriptor.params.size() != 2) {
+        throw std::runtime_error("Wrong args count for fade filter producer");
+    }
+    const std::string& direction = filterDescriptor.params[0];
+    if(direction != "in" && direction != "out") {
+        throw std::runtime_error(
+            std::format("Wrong direction for fade filter: expected in or out, got: {}", direction));
+    }
+    double durationMs = 0;
+    try {
+        durationMs = std::stod(filterDescriptor.params[1]);
+    }
+    catch(std::exception& exception) {
+        throw std::runtime_error("Error converting the 2nd argument of fade filter");
+    }
+    if(durationMs < 0) {
+        throw std::runtime_error(
+            std::format("Wrong duration for fade filter: expected >= 0, got: {}", durationMs));
+    }
+    return std::make_unique<FadeFilter>(direction, durationMs);
 }
 
 std::unique_ptr<IFilter> fmGeneratorCreator(const FilterDescriptor& filterDescriptor) {

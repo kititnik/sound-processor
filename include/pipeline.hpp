@@ -5,7 +5,7 @@
 #include <memory>
 #include <vector>
 
-// Ordered queue of filters to apply
+/** Ordered queue of filters to apply */
 class Pipeline {
 public:
     void addFilter(std::unique_ptr<IFilter> filter);
