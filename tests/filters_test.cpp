@@ -1,11 +1,11 @@
 #include "filters/ampl_filter.hpp"
+#include "filters/fade_filter.hpp"
 #include "filters/lowpass_filter.hpp"
 #include "filters/normalize_filter.hpp"
-#include "filters/silence_filter.hpp"
-#include "filters/timestretch_filter.hpp"
 #include "filters/repeat_filter.hpp"
 #include "filters/reverse_filter.hpp"
-#include "filters/fade_filter.hpp"
+#include "filters/silence_filter.hpp"
+#include "filters/timestretch_filter.hpp"
 #include "waveform.hpp"
 #include <catch2/catch_all.hpp>
 

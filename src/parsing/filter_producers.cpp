@@ -1,15 +1,15 @@
 #include "parsing/filter_producers.hpp"
 #include "filters/am_sin_gen_filter.hpp"
 #include "filters/ampl_filter.hpp"
+#include "filters/fade_filter.hpp"
 #include "filters/fm_sin_gen_filter.hpp"
 #include "filters/lowpass_filter.hpp"
 #include "filters/normalize_filter.hpp"
+#include "filters/repeat_filter.hpp"
+#include "filters/reverse_filter.hpp"
 #include "filters/silence_filter.hpp"
 #include "filters/sin_gen_filter.hpp"
 #include "filters/timestretch_filter.hpp"
-#include "filters/repeat_filter.hpp"
-#include "filters/reverse_filter.hpp"
-#include "filters/fade_filter.hpp"
 #include <format>
 #include <memory>
 #include <stdexcept>
@@ -251,8 +251,7 @@ std::unique_ptr<IFilter> repeatFilterCreator(const FilterDescriptor& filterDescr
         throw std::runtime_error("Error converting the 1st argument of repeat filter");
     }
     if(count < 1) {
-        throw std::runtime_error(
-            std::format("Wrong count for repeat filter: expected >= 1, got: {}", count));
+        throw std::runtime_error(std::format("Wrong count for repeat filter: expected >= 1, got: {}", count));
     }
     return std::make_unique<RepeatFilter>(static_cast<size_t>(count));
 }
@@ -277,8 +276,7 @@ std::unique_ptr<IFilter> fadeFilterCreator(const FilterDescriptor& filterDescrip
         throw std::runtime_error("Error converting the 2nd argument of fade filter");
     }
     if(durationMs < 0) {
-        throw std::runtime_error(
-            std::format("Wrong duration for fade filter: expected >= 0, got: {}", durationMs));
+        throw std::runtime_error(std::format("Wrong duration for fade filter: expected >= 0, got: {}", durationMs));
     }
     return std::make_unique<FadeFilter>(direction, durationMs);
 }

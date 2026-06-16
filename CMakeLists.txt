@@ -26,6 +26,8 @@ add_executable(sound_processor
     src/parsing/filter_producers.cpp
     src/parsing/filter_registry.cpp
     src/parsing/generator_filter_creator.cpp
+    src/loggers/logger.cpp
+    src/loggers/console_logger.cpp
 )
 
 target_include_directories(sound_processor PRIVATE include/)
@@ -73,6 +75,8 @@ if (BUILD_TESTS)
         src/parsing/filter_producers.cpp
         src/parsing/filter_registry.cpp
         src/parsing/generator_filter_creator.cpp
+        src/loggers/logger.cpp
+        src/loggers/console_logger.cpp
     )
 
     target_include_directories(sound_processor_tests PRIVATE include/)

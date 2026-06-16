@@ -25,9 +25,9 @@ void FadeFilter::apply(Waveform* sound) {
         for(size_t i = 0; i < fadeSamples; i++) {
             double factor = i / steps;
             double newValue = sound->getSample(i) * factor;
-            sound->setSample(i, static_cast<int16_t>(std::clamp(newValue,
-                static_cast<double>(std::numeric_limits<int16_t>::min()),
-                static_cast<double>(std::numeric_limits<int16_t>::max()))));
+            sound->setSample(
+                i, static_cast<int16_t>(std::clamp(newValue, static_cast<double>(std::numeric_limits<int16_t>::min()),
+                                                   static_cast<double>(std::numeric_limits<int16_t>::max()))));
         }
     }
     else {
@@ -35,9 +35,9 @@ void FadeFilter::apply(Waveform* sound) {
         for(size_t i = 0; i < fadeSamples; i++) {
             double factor = (steps - i) / steps;
             double newValue = sound->getSample(offset + i) * factor;
-            sound->setSample(offset + i, static_cast<int16_t>(std::clamp(newValue,
-                static_cast<double>(std::numeric_limits<int16_t>::min()),
-                static_cast<double>(std::numeric_limits<int16_t>::max()))));
+            sound->setSample(offset + i, static_cast<int16_t>(std::clamp(
+                                             newValue, static_cast<double>(std::numeric_limits<int16_t>::min()),
+                                             static_cast<double>(std::numeric_limits<int16_t>::max()))));
         }
     }
 }
