@@ -25,15 +25,16 @@ Waveform WavReader::read(std::istream& istr) const {
         throw std::runtime_error("Input stream failed reading FMT HEADER");
     }
     validateFmtHeader(fmtHeader);
-
     DataChunkHeader dataChunkHeader;
-    istr.read(reinterpret_cast<char*>(&dataChunkHeader), sizeof(dataChunkHeader));
-    if(istr.fail()) {
-        throw std::runtime_error("Input stream failed reading DATA CHUNK HEADER");
-    }
-    if(memcmp(&dataChunkHeader.chunkId, "data", 4) != 0) {
-        throw std::runtime_error(std::format(FILE_FORMAT_ERROR, "Data Chunk Header chunk Id", "data",
-                                             std::string_view(dataChunkHeader.chunkId, 4)));
+    while(true) {
+        istr.read(reinterpret_cast<char*>(&dataChunkHeader), sizeof(dataChunkHeader));
+        if(!istr.good()) {
+            throw std::runtime_error("Input stream failed reading DATA CHUNK HEADER");
+        }
+        if(memcmp(&dataChunkHeader.chunkId, "data", 4) == 0) {
+            break;
+        }
+        istr.seekg(dataChunkHeader.chunkSize, std::ios::cur);
     }
 
     size_t count = dataChunkHeader.chunkSize / sizeof(int16_t);
